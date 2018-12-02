@@ -1,3 +1,7 @@
+# Informática Gráfica
+
+### Juan Manuel Castillo Nievas
+
 ### Práctica 0
 
 La práctica 0 es opcional y se pide hacer alguna figura con cuadrado cambiando los colores. Es una introducción a OpenGL
