@@ -17,3 +17,10 @@ En la práctica 2 se pide crear 3 objetos por revolución: cilindro, cono y esfe
 ### Práctica 3
 
 Se pide hacer un objeto articulado. En este caso se ha hecho una excavadora utilizando cilindros y cubos. Hay 4 grados de libertad en las rotaciones.
+
+### Práctica 4
+
+Esta práctica se divide en 3 sesiones.
+- En la primera sesión se pide hacer los métodos que calculan las normales a los vértices y caras.
+- En la segunda sesión se pide hacer los métodos que dibujan la iluminación plana y suave. Hay dos luces: una fija blanca y una que se puede mover y rotar de color roja.
+- En la tercera sesión se pide hacer el método que dibuja una textura sobre el dado. La textura debe ser un skybox. En este caso se ha utilizado la textura de un dado.
