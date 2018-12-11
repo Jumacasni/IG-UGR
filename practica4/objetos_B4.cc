@@ -239,72 +239,68 @@ void  _triangulos3D::draw_iluminacion_suave(){
 
 void  _triangulos3D::draw_textura(){
 	_textura textura(1, "dado.jpg");
-
-	GLfloat cara1[] = {vertices[7].x, vertices[7].y, vertices[7].z,
+						// cara 1
+	GLfloat caras[] = {vertices[7].x, vertices[7].y, vertices[7].z,
 					vertices[3].x, vertices[3].y, vertices[3].z,
 					vertices[2].x, vertices[2].y, vertices[2].z,
-					vertices[6].x, vertices[6].y, vertices[6].z
-					};
-
-	GLfloat cara1tex[] = {0.0,0.5,
-			 0.0,0.75,
-			 0.25,0.75,
-			 0.25,0.5};
-
-	GLfloat cara2[] = {vertices[4].x, vertices[4].y, vertices[4].z,
+					vertices[6].x, vertices[6].y, vertices[6].z,
+						// cara 2
+					vertices[4].x, vertices[4].y, vertices[4].z,
 					vertices[7].x, vertices[7].y, vertices[7].z,
 					vertices[3].x, vertices[3].y, vertices[3].z,
-					vertices[0].x, vertices[0].y, vertices[0].z
-					};
-
-	GLfloat cara2tex[] = {0.5,0.5,
-			 0.25,0.5,
-			 0.25,0.75,
-			 0.5,0.75};
-
-	GLfloat cara3[] = {vertices[4].x, vertices[4].y, vertices[4].z,
 					vertices[0].x, vertices[0].y, vertices[0].z,
-					vertices[1].x, vertices[1].y, vertices[1].z,
-					vertices[5].x, vertices[5].y, vertices[5].z
-					};
-
-	GLfloat cara3tex[] = {0.5,0.5,
-			 0.5,0.75,
-			 0.75,0.75,
-			 0.75,0.5};
-
-	GLfloat cara4[] = {vertices[2].x, vertices[2].y, vertices[2].z,
+						// cara 3
+					vertices[4].x, vertices[4].y, vertices[4].z,
+					vertices[0].x, vertices[0].y, vertices[0].z,
 					vertices[1].x, vertices[1].y, vertices[1].z,
 					vertices[5].x, vertices[5].y, vertices[5].z,
-					vertices[6].x, vertices[6].y, vertices[6].z
-					};
-
-	GLfloat cara4tex[] = {0.75,0.5,
-			 0.75,0.75,
-			 1.0,0.75,
-			 1.0,0.5};
-
-	GLfloat cara5[] = {vertices[3].x, vertices[3].y, vertices[3].z,
+						// cara 4
+					vertices[2].x, vertices[2].y, vertices[2].z,
+					vertices[1].x, vertices[1].y, vertices[1].z,
+					vertices[5].x, vertices[5].y, vertices[5].z,
+					vertices[6].x, vertices[6].y, vertices[6].z,
+						// cara 5
+					vertices[3].x, vertices[3].y, vertices[3].z,
 					vertices[0].x, vertices[0].y, vertices[0].z,
 					vertices[1].x, vertices[1].y, vertices[1].z,
-					vertices[2].x, vertices[2].y, vertices[2].z
-					};
-
-	GLfloat cara5tex[] = {0.5,0.75,
-			 0.5,1.0,
-			 0.75,1.0,
-			 0.75,0.75};
-
-	GLfloat cara6[] = {vertices[6].x, vertices[6].y, vertices[6].z,
+					vertices[2].x, vertices[2].y, vertices[2].z,
+						// cara 6
+					vertices[6].x, vertices[6].y, vertices[6].z,
 					vertices[7].x, vertices[7].y, vertices[7].z,
 					vertices[4].x, vertices[4].y, vertices[4].z,
 					vertices[5].x, vertices[5].y, vertices[5].z
-					};
+				};
 
-	GLfloat cara6tex[] = {0.75,0.25,
-			 0.5,0.25,
-			 0.5,0.5,
-			 0.75,0.5};
+	GLfloat vertices_texturas[] = {0.0,0.5,
+								 0.0,0.75,
+								 0.25,0.75,
+								 0.25,0.5,
+
+								 0.5,0.5,
+								 0.25,0.5,
+								 0.25,0.75,
+								 0.5,0.75,
+
+								 0.5,0.5,
+								 0.5,0.75,
+								 0.75,0.75,
+								 0.75,0.5,
+
+								 0.75,0.5,
+								 0.75,0.75,
+								 1.0,0.75,
+								 1.0,0.5,
+
+								 0.5,0.75,
+								 0.5,1.0,
+								 0.75,1.0,
+								 0.75,0.75,
+
+								 0.75,0.25,
+								 0.5,0.25,
+								 0.5,0.5,
+								 0.75,0.5,
+								};
 
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -313,35 +309,10 @@ void  _triangulos3D::draw_textura(){
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textura.ident_textura);
 
-	glVertexPointer(3, GL_FLOAT, 0, cara1);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara1tex);
+	glVertexPointer(3, GL_FLOAT, 0, caras);
+	glTexCoordPointer(2, GL_FLOAT, 0, vertices_texturas);
 
-	glDrawArrays(GL_QUADS, 0, 4);
-
-	glVertexPointer(3, GL_FLOAT, 0, cara2);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara2tex);
-
-	glDrawArrays(GL_QUADS, 0, 4);
-
-	glVertexPointer(3, GL_FLOAT, 0, cara3);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara3tex);
-
-	glDrawArrays(GL_QUADS, 0, 4);
-
-	glVertexPointer(3, GL_FLOAT, 0, cara4);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara4tex);
-
-	glDrawArrays(GL_QUADS, 0, 4);
-
-	glVertexPointer(3, GL_FLOAT, 0, cara5);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara5tex);
-
-	glDrawArrays(GL_QUADS, 0, 4);
-
-	glVertexPointer(3, GL_FLOAT, 0, cara6);
-	glTexCoordPointer(2, GL_FLOAT, 0, cara6tex);
-
-	glDrawArrays(GL_QUADS, 0, 4);
+	glDrawArrays(GL_QUADS, 0, 24);	// 24 porque tiene que dibujar 6 caras por 4 arrays en cada cara
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
