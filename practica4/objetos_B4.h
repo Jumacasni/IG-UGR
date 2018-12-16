@@ -67,7 +67,7 @@ void    draw_solido(float r, float g, float b);
 void  draw_solido_ajedrez(float r1, float g1, float b1, float r2, float g2, float b2);
 void  draw_iluminacion_plana();
 void  draw_iluminacion_suave();
-void draw_textura();
+virtual void draw_textura();
 
 void  draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
 
@@ -87,9 +87,16 @@ GLfloat plano_s[4], plano_t[4];
 vector<_vertex2f> textura_coord;
 bool modo_text;
 
-_vertex4f ambiente_difusa;     //coeficientes ambiente y difuso
+_vertex4f ambiente;       //coeficientes ambiente y difuso
+_vertex4f difusa;
 _vertex4f especular;           //coeficiente especular
 float brillo;                  //exponente del brillo 
+
+// material oro
+_vertex4f ambiente_oro;       //coeficientes ambiente y difuso
+_vertex4f difusa_oro;
+_vertex4f especular_oro;           //coeficiente especular
+float brillo_oro;                  //exponente del brillo 
 
 };
 
@@ -103,8 +110,22 @@ class _cubo: public _triangulos3D
 public:
 
   _cubo(float tam=0.5);
+
+  void draw_textura();
 };
 
+//*************************************************************************
+// clase piramide
+//*************************************************************************
+
+class _tablero: public _triangulos3D
+{
+public:
+
+  _tablero(int filas=3, int columnas=3, float tam=2.0, float al=2.0);
+
+  void draw_textura();
+};
 
 //*************************************************************************
 // clase piramide
@@ -115,6 +136,8 @@ class _piramide: public _triangulos3D
 public:
 
   _piramide(float tam=0.5, float al=0.75);
+
+  void draw_textura();
 };
 
 //*************************************************************************
@@ -127,6 +150,8 @@ public:
    _objeto_ply();
 
 int   parametros(char *archivo);
+
+void draw_textura();
 };
 
 //*************************************************************************
@@ -148,6 +173,7 @@ public:
 
   _cilindro(float r=1, float h=1, int n=20, int tapas=3);
   void  rotacion();
+  void draw_textura();
 
   vector<_vertex3f> perfil;
   int num;
@@ -173,7 +199,8 @@ public:
 
   _medio_cilindro(float r=1, float h=1, int n=20, int tapas=3);
   void  rotacion();
-
+  void draw_textura();
+  
   vector<_vertex3f> perfil;
   int num;
   int tapas;
@@ -192,6 +219,7 @@ public:
 
   _cono(float r=1.0, float h=1, int n=20, bool tapas=true);
   void  rotacion();
+  void draw_textura();
 
   vector<_vertex3f> perfil;
   int num;
@@ -217,6 +245,7 @@ public:
 
   _esfera(float r=1, int lat=6, int lon=6, int tapas=3);
   void  rotacion();
+  void draw_textura();
 
   vector<_vertex3f> perfil; 
   int num;
@@ -275,6 +304,7 @@ class _tanque: public _triangulos3D
 public:
        _tanque();
 void  draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+void draw_textura();
 
 float giro_tubo;
 float giro_torreta;
@@ -361,6 +391,7 @@ class _excavadora: public _triangulos3D
 public:
        _excavadora();
 void  draw(_modo modo, float r1, float g1, float b1, float r2, float g2, float b2, float grosor);
+void draw_textura();
 
 float giro_cabina;
 float giro_primer_brazo;

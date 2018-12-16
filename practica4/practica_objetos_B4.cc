@@ -12,7 +12,7 @@
 using namespace std;
 
 // tipos
-typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CILINDRO, CONO, ESFERA, ARTICULADO, EXCAVADORA} _tipo_objeto;
+typedef enum{CUBO, PIRAMIDE, OBJETO_PLY, CILINDRO, CONO, ESFERA, ARTICULADO, TABLERO, EXCAVADORA} _tipo_objeto;
 _tipo_objeto t_objeto=CUBO;
 _modo   modo=POINTS;
 
@@ -33,14 +33,15 @@ bool luz1_activada = false;
 bool luz0_activada = false;
 _cubo cubo;
 _piramide piramide(0.85,1.3);
+_tablero tablero;
 _objeto_ply  ply; 
 _cilindro cilindro;
 _cono cono;
 _esfera esfera; 
 _tanque tanque;
 _excavadora excavadora;
-_luz light0(GL_LIGHT0, _vertex4f(0,1,0,0), _vertex4f(0.0,0.0,0.0,1), _vertex4f(1.0,1.0,1.0,1), _vertex4f(1.0,1.0,1.0,1));
-_luz light1(GL_LIGHT1, _vertex4f(0,0,20,1), _vertex4f(0.1,0.0,0.0,1), _vertex4f(1.0,0.4,0.4,1), _vertex4f(1.0,0.4,0.4,1));
+_luz light0(GL_LIGHT0, _vertex4f(0,1,0,0), _vertex4f(0.0,0.0,0.0,1), _vertex4f(1.0,1.0,1.0,1), _vertex4f(1.0,1.0,1.0,1));       // 0 si es direccional
+_luz light1(GL_LIGHT1, _vertex4f(0,0,20,1), _vertex4f(0.1,0.0,0.0,1), _vertex4f(1.0,0.4,0.4,1), _vertex4f(1.0,1.4,0.4,1));      // 1 si es posicional
 
 //**************************************************************************
 //
@@ -118,6 +119,7 @@ void draw_objects()
 
 switch (t_objeto){
 	case CUBO: cubo.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,2);break;
+        case TABLERO: tablero.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,2);break;
 	case PIRAMIDE: piramide.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,2);break;
         case OBJETO_PLY: ply.draw(modo,1.0,0.6,0.0,0.0,1.0,0.3,2);break;
         case CILINDRO: cilindro.draw(modo,1.0,0.0,0.0,0.0,1.0,0.0,2);break;
@@ -137,8 +139,9 @@ void draw(void)
 clean_window();
 if(luz0_activada)
         light0.activar();
-if(luz1_activada)
+if(luz1_activada){
         light1.transformar(light1.indice_luz, light1.a, light1.b, light1.c, light1.angx, light1.pos_x, light1.pos_y, light1.pos_z);
+}
 change_observer();
 draw_axis();
 draw_objects();
@@ -199,18 +202,19 @@ switch (toupper(Tecla1)){
         case 'U':t_objeto=ESFERA;break;
         case 'I':t_objeto=ARTICULADO;break;
         case 'O':t_objeto=EXCAVADORA;break;
+        case 'P':t_objeto=TABLERO;break;
         case 'A':light1.pos_x+=1;break;  
         case 'Z':light1.pos_x-=1;break;
         case 'S':light1.pos_y+=1;break;
         case 'X':light1.pos_y-=1;break;
         case 'D':light1.pos_z+=1;break;
         case 'C':light1.pos_z-=1;break;      
-        case 'F':light1.angx+=1;break;                              
-        case 'V':light1.angx-=1;break;
-        case 'G':light1.angy+=1;break;
-        case 'B':light1.angy-=1;break;
-        case 'H':light1.angz+=1;break;
-        case 'N':light1.angz-=1;break;
+        case 'F':light1.angx+=1;light1.a=1;light1.b=0;light1.c=0;break;                              
+        case 'V':light1.angx-=1;light1.a=1;light1.b=0;light1.c=0;break;
+        case 'G':light1.angy+=1;light1.a=0;light1.b=1;light1.c=0;break;
+        case 'B':light1.angy-=1;light1.a=0;light1.b=1;light1.c=0;break;
+        case 'H':light1.angz+=1;light1.a=0;light1.b=0;light1.c=1;break;
+        case 'N':light1.angz-=1;light1.a=0;light1.b=0;light1.c=1;break;
 	}
 
 glutPostRedisplay();

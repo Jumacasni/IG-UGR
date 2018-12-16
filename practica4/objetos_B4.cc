@@ -47,9 +47,15 @@ _triangulos3D::_triangulos3D()
 	b_normales_vertices = false;
 	b_textura_coord = false;
 
-	ambiente_difusa = _vertex4f(1,1,1,1);
-    brillo = 80;
+	ambiente = _vertex4f(1,1,1,1);
+	difusa = _vertex4f(1,1,1,1);
+    brillo = 40;
 	especular = _vertex4f(1,1,1,1);
+
+	ambiente_oro = _vertex4f(0,0,0,1);
+	difusa_oro = _vertex4f(0,0,0,1);
+    brillo_oro = 40;
+	especular_oro = _vertex4f(0,0,0,1);
 }
 
 
@@ -183,13 +189,21 @@ void  _triangulos3D::draw_iluminacion_plana(){
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_LIGHTING);
 
-	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *)&ambiente_difusa);
+	// Si ponemos el material aquí, se aplicará a todas las caras
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *)&ambiente);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *)&difusa);
   	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *)&especular);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,(GLfloat *)&brillo);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glBegin(GL_TRIANGLES);
 	for(int i =0; i < caras.size(); ++i){
+		// Si por ejemplo queremos que el material se aplique a las caras pares y otro para las impares
+		// haríamos:
+		// if(i % 2 == 0)
+		//	glMaterialfv(...);
+		// else
+		//	el otro material
 		glNormal3fv((GLfloat*) &normales_caras[i]);
 		glVertex3fv((GLfloat*) &vertices[caras[i]._0]);
 		glVertex3fv((GLfloat*) &vertices[caras[i]._1]);
@@ -214,7 +228,8 @@ void  _triangulos3D::draw_iluminacion_suave(){
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_LIGHTING);
 
-	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE,(GLfloat *)&ambiente_difusa);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,(GLfloat *)&ambiente);
+	glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,(GLfloat *)&difusa);
   	glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,(GLfloat *)&especular);
 	glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,(GLfloat *)&brillo);
 
@@ -238,6 +253,10 @@ void  _triangulos3D::draw_iluminacion_suave(){
 //*************************************************************************
 
 void  _triangulos3D::draw_textura(){
+	draw_textura();
+}
+
+void _cubo::draw_textura(){
 	_textura textura(1, "dado.jpg");
 						// cara 1
 	GLfloat caras[] = {vertices[7].x, vertices[7].y, vertices[7].z,
@@ -319,6 +338,126 @@ void  _triangulos3D::draw_textura(){
 	glDisable(GL_TEXTURE_2D);
 }
 
+void  _tablero::draw_textura(){
+	_textura textura(1, "logo.jpg");
+
+	GLfloat caras[] = {vertices[0].x, vertices[0].y,
+					vertices[4].x, vertices[4].y,
+					vertices[5].x, vertices[5].y,
+					vertices[1].x, vertices[1].y,
+
+					vertices[1].x, vertices[1].y,
+					vertices[5].x, vertices[5].y,
+					vertices[6].x, vertices[6].y,
+					vertices[2].x, vertices[2].y,
+
+					vertices[2].x, vertices[2].y,
+					vertices[6].x, vertices[6].y,
+					vertices[7].x, vertices[7].y,
+					vertices[3].x, vertices[3].y,
+
+					vertices[4].x, vertices[4].y,
+					vertices[8].x, vertices[8].y,
+					vertices[9].x, vertices[9].y,
+					vertices[5].x, vertices[5].y,
+
+					vertices[5].x, vertices[5].y,
+					vertices[9].x, vertices[9].y,
+					vertices[10].x, vertices[10].y,
+					vertices[6].x, vertices[6].y,
+
+					vertices[6].x, vertices[6].y,
+					vertices[10].x, vertices[10].y,
+					vertices[11].x, vertices[11].y,
+					vertices[7].x, vertices[7].y,
+
+					vertices[8].x, vertices[8].y,
+					vertices[12].x, vertices[12].y,
+					vertices[13].x, vertices[13].y,
+					vertices[9].x, vertices[9].y,
+
+					vertices[9].x, vertices[9].y,
+					vertices[13].x, vertices[13].y,
+					vertices[14].x, vertices[14].y,
+					vertices[10].x, vertices[10].y,
+
+					vertices[10].x, vertices[10].y,
+					vertices[14].x, vertices[14].y,
+					vertices[15].x, vertices[15].y,
+					vertices[11].x, vertices[11].y
+					};
+
+	GLfloat vertices_texturas[] = {0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0,
+
+								 0.0,0.0,
+								 0.0,1.0,
+								 1.0,1.0,
+								 1.0,0.0
+								};
+
+	glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState (GL_TEXTURE_COORD_ARRAY_EXT);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textura.ident_textura);
+
+	glVertexPointer(2, GL_FLOAT, 0, caras);
+	glTexCoordPointer(2, GL_FLOAT, 0, vertices_texturas);
+
+	glDrawArrays(GL_QUADS, 0, 36);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void  _piramide::draw_textura(){ };
+void  _objeto_ply::draw_textura(){ };
+void  _cilindro::draw_textura(){ };
+void  _cono::draw_textura(){ };
+void  _esfera::draw_textura(){ };
+void  _excavadora::draw_textura(){ };
+void  _tanque::draw_textura(){ };
+void  _medio_cilindro::draw_textura(){ };
 
 //*************************************************************************
 
@@ -371,6 +510,59 @@ caras[10]._0=4;caras[10]._1=1;caras[10]._2=0;
 caras[11]._0=1;caras[11]._1=4;caras[11]._2=5;  
 }
 
+//*************************************************************************
+// clase tablero
+//*************************************************************************
+
+_tablero::_tablero(int filas, int columnas, float tam, float al)
+{
+
+float anchura_cada_cuadrado = tam/columnas;
+float altura_cada_cuadrado = al/filas;
+
+_vertex3f vertice_aux;
+_vertex3i cara_aux;
+
+//vertices 
+vertices.resize((filas+1)*(columnas+1)); 
+
+float vertice_x = -tam/2;
+float vertice_y = al/2;
+
+int n_vertice = 0;
+
+for(int i = 0; i < filas+1; ++i){
+	for(int j = 0; j < columnas+1; ++j){
+		vertice_aux.x = vertice_x;
+		vertice_aux.y = vertice_y;
+		vertice_aux.z = 0;
+		vertices[n_vertice] = vertice_aux;
+
+		n_vertice++;
+		vertice_x += anchura_cada_cuadrado;
+	}
+
+	vertice_x = -tam/2;
+	vertice_y -= altura_cada_cuadrado;
+}
+
+caras.resize(filas*columnas*2);
+
+for(int i = 0; i < filas; ++i){
+	for(int j = 0; j < columnas; ++j){
+		cara_aux._0 = (columnas+1)*i + j;
+		cara_aux._1 = (columnas+1)*(i+1) + j;
+		cara_aux._2 = (columnas+1)*(i+1) + (j+1);
+		caras.push_back(cara_aux);
+
+		cara_aux._0 = (columnas+1)*(i+1) + (j+1);
+		cara_aux._1 = (columnas+1)*i + (j+1);
+		cara_aux._2 = (columnas+1)*i + j;
+		caras.push_back(cara_aux);
+	}
+}
+
+}
 
 //*************************************************************************
 // clase piramide
@@ -394,8 +586,6 @@ caras[2]._0=2;caras[2]._1=3;caras[2]._2=4;
 caras[3]._0=3;caras[3]._1=0;caras[3]._2=4;
 caras[4]._0=3;caras[4]._1=1;caras[4]._2=0;
 caras[5]._0=3;caras[5]._1=2;caras[5]._2=1;
-
-calcular_normales_caras();
 
 }
 
@@ -1136,8 +1326,8 @@ void _luz::desactivar(){
 
 void _luz::transformar(GLenum indice_luz, int a, int b, int c, float ang, float x, float y, float z){
 	glPushMatrix();
-	glRotatef(ang,a,b,c);
 	glTranslatef(x,y,z);
+	glRotatef(ang,a,b,c);
 	glLightfv(indice_luz, GL_POSITION, (GLfloat*) &punto_luz);
 	glPopMatrix();
 
@@ -1179,3 +1369,9 @@ _textura::_textura(GLuint textura_id, char const *archivoJPG){
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imagen.width(), imagen.height(),
 		0, GL_RGB, GL_UNSIGNED_BYTE, &data[0]);
 }
+
+// IMPORTANTE EXAMEN:
+// crear un objeto tablero para aplicar textura, porque en el examen podemos aplicar la textura tanto al cubo 
+// como al tablero
+
+// también se podría pedir calcular las normales a los vértices sin haber calculado previamente las normales
