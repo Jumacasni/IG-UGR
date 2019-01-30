@@ -23,4 +23,4 @@ Se pide hacer un objeto articulado. En este caso se ha hecho una excavadora util
 Esta práctica se divide en 3 sesiones.
 - En la primera sesión se pide hacer los métodos que calculan las normales a los vértices y caras.
 - En la segunda sesión se pide hacer los métodos que dibujan la iluminación plana y suave. Hay dos luces: una fija blanca y una que se puede mover y rotar de color roja.
-- En la tercera sesión se pide hacer el método que dibuja una textura sobre el dado. La textura debe ser un skybox. En este caso se ha utilizado la textura de un dado.
+- En la tercera sesión se pide hacer el método que dibuja una textura sobre el dado. Se puede aplicar la textura de un skybox al dado o crear objeto tablero n x m en el que la textura se aplique a cada cuadrado. Ambas opciones han sido implementadas.
