@@ -27,4 +27,4 @@ Esta práctica se divide en 3 sesiones.
 
 ### Práctica 5
 
-En esta práctica se pide implementar la selección por color para el objeto articulado de la práctica 3. Además, pulsando un botón se debe pasara una proyección ortográfica en la que se puede hacer zoom con la rueda del ratón.
+En esta práctica se pide implementar la selección por color para el objeto articulado de la práctica 3. Además, pulsando un botón se debe pasar a una proyección ortográfica en la que se puede hacer zoom con la rueda del ratón.
