@@ -24,3 +24,7 @@ Esta práctica se divide en 3 sesiones.
 - En la primera sesión se pide hacer los métodos que calculan las normales a los vértices y caras.
 - En la segunda sesión se pide hacer los métodos que dibujan la iluminación plana y suave. Hay dos luces: una fija blanca y una que se puede mover y rotar de color roja.
 - En la tercera sesión se pide hacer el método que dibuja una textura sobre el dado. Se puede aplicar la textura de un skybox al dado o crear objeto tablero n x m en el que la textura se aplique a cada cuadrado. Ambas opciones han sido implementadas.
+
+### Práctica 5
+
+En esta práctica se pide implementar la selección por color para el objeto articulado de la práctica 3. Además, pulsando un botón se debe pasara una proyección ortográfica en la que se puede hacer zoom con la rueda del ratón.
